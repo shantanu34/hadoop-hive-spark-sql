@@ -7,6 +7,9 @@ class SqlLoader:
         self.tableName = tableName
         return self
 
+    def join(self,tableName,whereText,joinType):
+        pass
+
     async def doThread(self, parameter_list):
         print("Jai Ho")
 
