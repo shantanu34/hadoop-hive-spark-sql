@@ -7,8 +7,9 @@ class SqlLoader:
         self.tableName = tableName
         return self
 
-    def join(self,tableName,whereText,joinType):
-        pass
+    def join(self,tableName,whereText,joinType="join"):
+        if joinType=='join':
+            print("ohh join")
 
     async def doThread(self, parameter_list):
         print("Jai Ho")
@@ -17,7 +18,7 @@ class SqlLoader:
         self.selectList.append(value)
         return self
 
-    def setWhere(self,key,value,operator):
+    def setWhere(self,key,value,operator="="):
         self.whereList.append(key+" "+operator+" '"+value+"'")
 
     def get(self):
