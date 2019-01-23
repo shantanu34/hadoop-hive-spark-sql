@@ -3,7 +3,7 @@ class SqlLoader:
     tableName = ""
     whereList = list()
 
-    def setTable(self, tableName):
+    def table(self, tableName):
         self.tableName = tableName
         return self
 
@@ -14,11 +14,11 @@ class SqlLoader:
     async def doThread(self, parameter_list):
         print("Jai Ho")
 
-    def setSelect(self, value):
+    def select(self, value):
         self.selectList.append(value)
         return self
 
-    def setWhere(self,key,value,operator="="):
+    def where(self,key,value,operator="="):
         self.whereList.append(key+" "+operator+" '"+value+"'")
 
     def get(self):

@@ -4,8 +4,8 @@ class HadoopHiveSparkSql:
     
     @staticmethod
     def table(tableName):
-        return SqlLoader().setTable(tableName)
+        return SqlLoader().table(tableName)
     
 
         
-print(HadoopHiveSparkSql.table("employee").setSelect("id,name").setSelect(",department").get())
+print(HadoopHiveSparkSql.table("employee").select("id,name").select(",department").get())
