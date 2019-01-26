@@ -29,10 +29,10 @@ class SqlLoader:
         if not self.selectList:
             sql += "* "
         else:
-            sql += ("".join(self.selectList))
+            sql += ("".join(self.selectList)).strip()
 
         if not self.selectList:
             sql+="* "
         else:
-            sql+=("".join(self.selectList))
+            sql+=("".join(self.selectList)).strip()
         return sql+" from "+self.tableName
