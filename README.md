@@ -11,19 +11,18 @@ $users = DB::table('users')->select('name', 'email as user_email')->get();
 </code>
 <br/>The distinct method allows you to force the query to return distinct results:
 
-<code>$users = DB::table('users')->distinct()->get();</code>
-If you already have a query builder instance and you wish to add a column to its existing select clause, you may use the addSelect method:
+<code>$users = DB::table('users')->distinct()->get();</code><br/>
+If you already have a query builder instance and you wish to add a column to its existing select clause, you may use the addSelect method:<br/>
 
-$query = DB::table('users')->select('name');
+<code>$query = DB::table('users')->select('name');
+$users = $query->addSelect('age')->get();</code><br/>
 
-$users = $query->addSelect('age')->get();
-
-Raw Expressions
+<br/><h4>Raw Expressions</h4>
 Sometimes you may need to use a raw expression in a query. These expressions will be injected into the query as strings, so be careful not to create any SQL injection points! To create a raw expression, you may use the DB::raw method:
-
+<br/><code>
 $users = DB::table('users')
                      ->select(DB::raw('count(*) as user_count, status'))
                      ->where('status', '<>', 1)
                      ->groupBy('status')
-                     ->get();
+                     ->get();</code>
 
