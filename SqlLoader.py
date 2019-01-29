@@ -1,6 +1,5 @@
 import cgi
 
-
 class SqlLoader:
     selectList = list()
     tableName = ""
@@ -10,6 +9,13 @@ class SqlLoader:
 
     def table(self, tableName):
         self.tableName = tableName
+        return self
+
+    def whereBetween(self, key, pointsList=[]):
+        if not pointsList[1]:
+            pointsList[1] = pointsList[0]
+        self.whereList.append(
+            key + ">= "+pointsList[0]+" AND "+key + "<= "+pointsList[1])
         return self
 
     def join(self, tableName, whereText, joinType="INNER"):
