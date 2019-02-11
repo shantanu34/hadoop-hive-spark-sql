@@ -4,6 +4,7 @@ class SqlLoader:
     selectList = list()
     tableName = ""
     whereList = list()
+    orWhereList = list()
     sqlLimit = str("")
     sqlJoinList = list()
 
@@ -14,8 +15,7 @@ class SqlLoader:
     def whereBetween(self, key, pointsList=[]):
         if not pointsList[1]:
             pointsList[1] = pointsList[0]
-        self.whereList.append(
-            key + ">= "+pointsList[0]+" AND "+key + "<= "+pointsList[1])
+        self.whereList.append(key + ">= "+str(pointsList[0])+" AND "+key + "<= "+str(pointsList[1]))
         return self
 
     def join(self, tableName, whereText, joinType="INNER"):
@@ -33,9 +33,6 @@ class SqlLoader:
             self.sqlJoinList.append(joinType+" "+tableName+" ON "+whereText)
         return self
 
-    async def doThread(self, parameter_list):
-        print("Jai Ho")
-
     def select(self, value):
         self.selectList.append(value)
         return self
@@ -44,14 +41,21 @@ class SqlLoader:
         if not value:
             self.whereList.append(keyOrRaw)
         else:
-            self.whereList.append(keyOrRaw+"'"+cgi.escape(value)+"'")
+            self.whereList.append(keyOrRaw+"'"+cgi.escape(str(value))+"'")
         return self
 
-    def limit(self, limitValue, offset=""):
+    def orWhere(self, keyOrRaw, value=""):
+        if not value:
+            self.orWhereList.append(keyOrRaw)
+        else:
+            self.orWhereList.append(keyOrRaw+"'"+cgi.escape(str(value))+"'")
+        return self
+
+    def limit(self, limitValue, offset=0):
         if not offset:
             self.sqlLimit = " LIMIT "+limitValue
         else:
-            self.sqlLimit = " LIMIT "+offset+","+limitValue
+            self.sqlLimit = " LIMIT "+str(offset)+","+str(limitValue)
         return self
 
     def get(self):
@@ -61,8 +65,21 @@ class SqlLoader:
         else:
             sql += ("".join(self.selectList)).strip()
 
-        sql += " FROM "+self.tableName
-
+        sql += " FROM "+self.tableName     
+        if self.sqlJoinList:
+            sql +=  " "+(" ".join(self.sqlJoinList)).strip()
+        if self.whereList or self.orWhereList:
+            sql += " WHERE "
         if self.whereList:
-            sql += " WHERE "+(" AND ".join(self.whereList)).strip()
-        return sql
+            sql += (" AND ".join(self.whereList)).strip()
+        if self.orWhereList:
+            if len(self.orWhereList)==1:
+                sql+=" OR "
+            else:
+                sql+=" AND ("
+            sql += (" OR ".join(self.orWhereList)).strip()
+            if len(self.orWhereList)>1:
+                sql+=")"
+        if self.sqlLimit:
+            sql+=self.sqlLimit
+        return sql.strip()
