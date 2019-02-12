@@ -7,9 +7,22 @@ class SqlLoader:
     orWhereList = list()
     sqlLimit = str("")
     sqlJoinList = list()
+    sqlOrderBy=str("")
+    sqlGroupBy=str("")
 
     def table(self, tableName):
         self.tableName = tableName
+        return self
+
+    def orderBy(self,col,sortType=""):
+        if not sortType:
+            self.sqlOrderBy=" "+col
+        else:
+            self.sqlOrderBy=" "+col+" "+sortType
+        return self
+
+    def groupBy(self,col):
+        self.sqlGroupBy=" group by "+col
         return self
 
     def whereBetween(self, key, pointsList=[]):
@@ -80,6 +93,10 @@ class SqlLoader:
             sql += (" OR ".join(self.orWhereList)).strip()
             if len(self.orWhereList)>1:
                 sql+=")"
+        if self.sqlOrderBy:
+            sql+=self.sqlOrderBy
+        if self.sqlGroupBy:
+            sql+=self.sqlGroupBy
         if self.sqlLimit:
             sql+=self.sqlLimit
         return sql.strip()
