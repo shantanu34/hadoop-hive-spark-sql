@@ -10,18 +10,18 @@ Its return raw sql query string this can be use in Framework<br/>
 ---------------------------------------------
 <br/>
 <code>
-print(HadoopHiveSparkSql.table("employee")<br/>
-      .select("id,name")<br/>
-      .select(",department")<br/>
-      .where("ram=(select id from users)")<br/>
-      .where("city=", "delhi")<br/>
-      .orWhere("seller=",'100')<br/>
-      .orWhere("brand=",'rock')<br/>
-      .whereBetween("age",[200,300])<br/>
-      .join("users","users.id=employee.emp_id","left")<br/>
-      .join("cars","cars.id=employee.emp_id")<br/>
-      .groupBy("name")<br/>
-      .orderBy("ID","desc")<br/>
+print(HadoopHiveSparkSql.table("employee")
+      .select("id,name")
+      .select(",department")
+      .where("ram=(select id from users)")
+      .where("city=", "delhi")
+      .orWhere("seller=",'100')
+      .orWhere("brand=",'rock')
+      .whereBetween("age",[200,300])
+      .join("users","users.id=employee.emp_id","left")
+      .join("cars","cars.id=employee.emp_id")
+      .groupBy("name")
+      .orderBy("ID","desc")
       .limit(10,20).get())
 </code>
 
