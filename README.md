@@ -1,32 +1,153 @@
 # hadoop-hive-spark-sql
-Under initial stage big-data sql
+SQL framework ORM independent, it helps you build sql query in python<br/>
+What ever you using Hive, HBase, Spark* SQL, Django & FLASK etc so you can gernate simple SQL query<br/>
+Its return raw sql query string this can be use in Framework<br/>
 
-<h1>Selects</h1>
-<br/><p>
-Specifying A Select Clause
-Of course, you may not always want to select all columns from a database table. Using the  select method, you can specify a custom select clause for the query:</p>
 
+
+<!--New Section **************************-->
+<br/><h4>____________</h4>
+---------------------------------------------
+<br/>
 <code>
-HadoopHiveSparkSql.table("employee")
-      .select("id,name").get()
-</code>
-SELECT id,name FROM employee
-<br/>multiple select
-<code>
-HadoopHiveSparkSql.table("employee")
+print(HadoopHiveSparkSql.table("employee")
       .select("id,name")
-      .select(",department").get()
+      .select(",department")
+      .where("ram=(select id from users)")
+      .where("city=", "delhi")
+      .orWhere("seller=",'100')
+      .orWhere("brand=",'rock')
+      .whereBetween("age",[200,300])
+      .join("users","users.id=employee.emp_id","left")
+      .join("cars","cars.id=employee.emp_id")
+      .groupBy("name")
+      .orderBy("ID","desc")
+      .limit(10,20).get())
 </code>
-SELECT id,name,department FROM employee<br/>
-If you already have a query builder instance and you wish to add a column to its existing select clause, you may use the addSelect method:<br/>
 
 
-<br/><h4>Raw Expressions</h4>
-Sometimes you may need to use a raw expression in a query. These expressions will be injected into the query as strings, so be careful not to create any SQL injection points! To create a raw expression, you may use the DB::raw method:
-<br/><code>
-$users = DB::table('users')
-                     ->select(DB::raw('count(*) as user_count, status'))
-                     ->where('status', '<>', 1)
-                     ->groupBy('status')
-                     ->get();</code>
 
+<!--New Section **************************-->
+<br/><h4>____________</h4>
+---------------------------------------------
+<br/>
+<code>
+print(HadoopHiveSparkSql.table("employee")
+      .select("id,name")
+      .select(",department")
+      .where("ram=(select id from users)")
+      .where("city=", "delhi")
+      .orWhere("seller=",'100')
+      .orWhere("brand=",'rock')
+      .whereBetween("age",[200,300])
+      .join("users","users.id=employee.emp_id","left")
+      .join("cars","cars.id=employee.emp_id")
+      .groupBy("name")
+      .orderBy("ID","desc")
+      .limit(10,20).get())
+</code>
+
+<!--New Section **************************-->
+<br/><h4>____________</h4>
+---------------------------------------------
+<br/>
+<code>
+print(HadoopHiveSparkSql.table("employee")
+      .select("id,name")
+      .select(",department")
+      .where("ram=(select id from users)")
+      .where("city=", "delhi")
+      .orWhere("seller=",'100')
+      .orWhere("brand=",'rock')
+      .whereBetween("age",[200,300])
+      .join("users","users.id=employee.emp_id","left")
+      .join("cars","cars.id=employee.emp_id")
+      .groupBy("name")
+      .orderBy("ID","desc")
+      .limit(10,20).get())
+</code>
+
+
+<!--New Section **************************-->
+<br/><h4>____________</h4>
+---------------------------------------------
+<br/>
+<code>
+print(HadoopHiveSparkSql.table("employee")
+      .select("id,name")
+      .select(",department")
+      .where("ram=(select id from users)")
+      .where("city=", "delhi")
+      .orWhere("seller=",'100')
+      .orWhere("brand=",'rock')
+      .whereBetween("age",[200,300])
+      .join("users","users.id=employee.emp_id","left")
+      .join("cars","cars.id=employee.emp_id")
+      .groupBy("name")
+      .orderBy("ID","desc")
+      .limit(10,20).get())
+</code>
+
+
+<!--New Section **************************-->
+<br/><h4>____________</h4>
+---------------------------------------------
+<br/>
+<code>
+print(HadoopHiveSparkSql.table("employee")
+      .select("id,name")
+      .select(",department")
+      .where("ram=(select id from users)")
+      .where("city=", "delhi")
+      .orWhere("seller=",'100')
+      .orWhere("brand=",'rock')
+      .whereBetween("age",[200,300])
+      .join("users","users.id=employee.emp_id","left")
+      .join("cars","cars.id=employee.emp_id")
+      .groupBy("name")
+      .orderBy("ID","desc")
+      .limit(10,20).get())
+</code>
+
+
+
+<!--New Section **************************-->
+<br/><h4>____________</h4>
+---------------------------------------------
+<br/>
+<code>
+print(HadoopHiveSparkSql.table("employee")
+      .select("id,name")
+      .select(",department")
+      .where("ram=(select id from users)")
+      .where("city=", "delhi")
+      .orWhere("seller=",'100')
+      .orWhere("brand=",'rock')
+      .whereBetween("age",[200,300])
+      .join("users","users.id=employee.emp_id","left")
+      .join("cars","cars.id=employee.emp_id")
+      .groupBy("name")
+      .orderBy("ID","desc")
+      .limit(10,20).get())
+</code>
+
+
+<!--New Section **************************-->
+<br/><h4>____________</h4>
+---------------------------------------------
+<br/>
+<code>
+print(HadoopHiveSparkSql.table("employee")
+      .select("id,name")
+      .select(",department")
+      .where("ram=(select id from users)")
+      .where("city=", "delhi")
+      .orWhere("seller=",'100')
+      .orWhere("brand=",'rock')
+      .whereBetween("age",[200,300])
+      .join("users","users.id=employee.emp_id","left")
+      .join("cars","cars.id=employee.emp_id")
+      .groupBy("name")
+      .orderBy("ID","desc")
+      .limit(10,20).get())
+</code>

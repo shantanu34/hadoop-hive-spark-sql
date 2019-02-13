@@ -16,9 +16,9 @@ class SqlLoader:
 
     def orderBy(self,col,sortType=""):
         if not sortType:
-            self.sqlOrderBy=" "+col
+            self.sqlOrderBy=" order by "+col
         else:
-            self.sqlOrderBy=" "+col+" "+sortType
+            self.sqlOrderBy=" order by "+col+" "+sortType
         return self
 
     def groupBy(self,col):
@@ -93,10 +93,10 @@ class SqlLoader:
             sql += (" OR ".join(self.orWhereList)).strip()
             if len(self.orWhereList)>1:
                 sql+=")"
-        if self.sqlOrderBy:
-            sql+=self.sqlOrderBy
-        if self.sqlGroupBy:
+        if self.sqlGroupBy.strip():
             sql+=self.sqlGroupBy
-        if self.sqlLimit:
+        if self.sqlOrderBy.strip():
+            sql+=self.sqlOrderBy
+        if self.sqlLimit.strip():
             sql+=self.sqlLimit
         return sql.strip()
