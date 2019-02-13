@@ -6,7 +6,7 @@ Its return raw sql query string this can be use in Framework<br/>
 
 
 <!--New Section **************************-->
-<br/><h4>____________</h4>
+<br/><h4>Type Here</h4>
 ---------------------------------------------
 <br/>
 <code>
