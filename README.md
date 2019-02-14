@@ -54,15 +54,18 @@ use with limit : imit(10,20)
 
 
 <!--New Section **************************-->
-<br/><h4>Join ('FULL OUTER', 'INNER', 'LEFT', 'RIGHT', 'JOIN')</h4>
-Default : <code></code><br/>
+<br/><h4>Join ('FULL OUTER', 'INNER', 'LEFT', 'RIGHT', 'JOIN')</h4><br/>
+Default : <code>join("users","users.id=employee.emp_id")</code><br/>
+
 FULL OUTER : <code>join("users","users.id=employee.emp_id","FULL OUTER")</code><br/>
+
 INNER : <code>join("users","users.id=employee.emp_id","INNER")</code><br/>
+
 LEFT : <code>join("users","users.id=employee.emp_id","LEFT")</code><br/>
+
 RIGHT : <code>join("users","users.id=employee.emp_id","RIGHT")</code><br/>
+
 JOIN : <code>join("users","users.id=employee.emp_id","JOIN")</code><br/>
-
-
 
 
 <!--New Section **************************-->
