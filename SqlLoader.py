@@ -104,6 +104,8 @@ class SqlLoader:
             sql += " WHERE "
         if self.whereList:
             sql += (" AND ".join(self.whereList)).strip()
+        if self.havingList or self.orHavingList:
+            sql += " HAVING "
         if self.orWhereList:
             if len(self.orWhereList)==1:
                 sql+=" OR "
