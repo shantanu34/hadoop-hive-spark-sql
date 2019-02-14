@@ -73,13 +73,12 @@ JOIN : <code>join("users","users.id=employee.emp_id","JOIN")</code><br/>
 Using OR with Having :<br>
 <code>
 HadoopHiveSparkSql.table("employee").select("id,name").orHaving("seller=",'100').get()
-</code><br>
+</code><br><br/>
 You can use key and value based parameters : having("city=", "ABC")<br>
-Or you can use raw where query : 
-where("col=(select id from users)")
+Or you can use raw where query : having("col=(select id from users)")<br/>
 <br/>
 <code>
-HadoopHiveSparkSql.table("employee").select("id,name").select(",department").where("ram=(select id from users)").where("city=", "delhi").get()
+HadoopHiveSparkSql.table("employee").select("id,name").select(",department").having("id=(select id from users)").having("city=", "delhi").get()
 </code>
 
 
