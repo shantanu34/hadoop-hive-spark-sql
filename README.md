@@ -1,7 +1,7 @@
 # hadoop-hive-spark-sql
 SQL framework ORM independent, it helps you build sql query in python<br/>
 What ever you using Hive, HBase, Spark* SQL, Django & FLASK etc so you can gernate simple SQL query<br/>
-Its return raw sql query string this can be use in Framework<br/>
+Its return raw sql query string this can be use in any Framework<br/>
 
 
 
@@ -42,7 +42,7 @@ HadoopHiveSparkSql.table("employee") .select("id,name") .orWhere("seller=",'100'
 </h4>
 Use of group by : groupBy("name")
 
-<br><code>HadoopHiveSparkSql.table("employee") .select("id,name") .groupBy("name") .get()
+<br><code>HadoopHiveSparkSql.table("employee") .select("id,name") .groupBy("name") .get()</code>
 
 Use order by : orderBy("ID","desc") 
 
@@ -54,24 +54,14 @@ use with limit : imit(10,20)
 
 
 <!--New Section **************************-->
-<br/><h4>____________</h4>
----------------------------------------------
-<br/>
-<code>
-print(HadoopHiveSparkSql.table("employee")
-      .select("id,name")
-      .select(",department")
-      .where("ram=(select id from users)")
-      .where("city=", "delhi")
-      .orWhere("seller=",'100')
-      .orWhere("brand=",'rock')
-      .whereBetween("age",[200,300])
-      .join("users","users.id=employee.emp_id","left")
-      .join("cars","cars.id=employee.emp_id")
-      .groupBy("name")
-      .orderBy("ID","desc")
-      .limit(10,20).get())
-</code>
+<br/><h4>Join ('FULL OUTER', 'INNER', 'LEFT', 'RIGHT', 'JOIN')</h4>
+Default : <code></code><br/>
+FULL OUTER : <code>join("users","users.id=employee.emp_id","FULL OUTER")</code><br/>
+INNER : <code>join("users","users.id=employee.emp_id","INNER")</code><br/>
+LEFT : <code>join("users","users.id=employee.emp_id","LEFT")</code><br/>
+RIGHT : <code>join("users","users.id=employee.emp_id","RIGHT")</code><br/>
+JOIN : <code>join("users","users.id=employee.emp_id","JOIN")</code><br/>
+
 
 
 
