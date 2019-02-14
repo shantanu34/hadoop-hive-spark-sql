@@ -4,7 +4,9 @@ class SqlLoader:
     selectList = list()
     tableName = ""
     whereList = list()
+    havingList = list()
     orWhereList = list()
+    orHavingList = list()
     sqlLimit = str("")
     sqlJoinList = list()
     sqlOrderBy=str("")
@@ -64,6 +66,20 @@ class SqlLoader:
             self.orWhereList.append(keyOrRaw+"'"+cgi.escape(str(value))+"'")
         return self
 
+    def having(self, keyOrRaw, value=""):
+        if not value:
+            self.havingList.append(keyOrRaw)
+        else:
+            self.havingList.append(keyOrRaw+"'"+cgi.escape(str(value))+"'")
+        return self
+
+    def orHaving(self, keyOrRaw, value=""):
+        if not value:
+            self.orHavingList.append(keyOrRaw)
+        else:
+            self.orHavingList.append(keyOrRaw+"'"+cgi.escape(str(value))+"'")
+        return self
+
     def limit(self, limitValue, offset=0):
         if not offset:
             self.sqlLimit = " LIMIT "+limitValue
@@ -72,6 +88,9 @@ class SqlLoader:
         return self
 
     def get(self):
+        """
+            return -- string data
+        """
         sql = "SELECT "
         if not self.selectList:
             sql += "* "
@@ -92,6 +111,16 @@ class SqlLoader:
                 sql+=" AND ("
             sql += (" OR ".join(self.orWhereList)).strip()
             if len(self.orWhereList)>1:
+                sql+=")"
+        if self.havingList:
+            sql += (" AND ".join(self.havingList)).strip()
+        if self.orHavingList:
+            if len(self.orHavingList)==1:
+                sql+=" OR "
+            else:
+                sql+=" AND ("
+            sql += (" OR ".join(self.orHavingList)).strip()
+            if len(self.orHavingList)>1:
                 sql+=")"
         if self.sqlGroupBy.strip():
             sql+=self.sqlGroupBy

@@ -9,7 +9,7 @@ Its return raw sql query string this can be use in any Framework<br/>
 <br/><h4>Select</h4>
 <br/>
 <code>
-HadoopHiveSparkSql.table("employee") .select("id,name") .select(",department").get()
+HadoopHiveSparkSql.table("employee").select("id,name").select(",department").get()
 </code>
 
 
@@ -21,7 +21,7 @@ Or you can use raw where query :
 where("col=(select id from users)")
 <br/>
 <code>
-HadoopHiveSparkSql.table("employee") .select("id,name").select(",department").where("ram=(select id from users)").where("city=", "delhi").get()
+HadoopHiveSparkSql.table("employee").select("id,name").select(",department").where("ram=(select id from users)").where("city=", "delhi").get()
 </code>
 
 <!--New Section **************************-->
@@ -29,11 +29,11 @@ HadoopHiveSparkSql.table("employee") .select("id,name").select(",department").wh
 If you want data according min and max  use : <br/>
 <code>
 whereBetween("age",[200,300]) 
-HadoopHiveSparkSql.table("employee") .select("id,name") .whereBetween("age",[200,300]) .get()
+HadoopHiveSparkSql.table("employee").select("id,name").whereBetween("age",[200,300]).get()
 </code><br/>
 Using OR with where :<br>
 <code>
-HadoopHiveSparkSql.table("employee") .select("id,name") .orWhere("seller=",'100').get()
+HadoopHiveSparkSql.table("employee").select("id,name").orWhere("seller=",'100').get()
 </code>
 
 
@@ -42,15 +42,15 @@ HadoopHiveSparkSql.table("employee") .select("id,name") .orWhere("seller=",'100'
 </h4>
 Use of group by : groupBy("name")
 
-<br><code>HadoopHiveSparkSql.table("employee") .select("id,name") .groupBy("name") .get()</code>
+<br><code>HadoopHiveSparkSql.table("employee").select("id,name").groupBy("name").get()</code>
 
 Use order by : orderBy("ID","desc") 
 
-<br><code>HadoopHiveSparkSql.table("employee") .select("id,name") .orderBy("ID","desc") .get()</code>
+<br><code>HadoopHiveSparkSql.table("employee").select("id,name").orderBy("ID","desc").get()</code>
 
 use with limit : imit(10,20)
 
-<br><code>HadoopHiveSparkSql.table("employee") .select("id,name") .limit(10,20).get()</code><br/>
+<br><code>HadoopHiveSparkSql.table("employee").select("id,name").limit(10,20).get()</code>
 
 
 <!--New Section **************************-->
@@ -69,42 +69,36 @@ JOIN : <code>join("users","users.id=employee.emp_id","JOIN")</code><br/>
 
 
 <!--New Section **************************-->
+<br/><h4>Having & OrHaving</h4>
+Using OR with Having :<br>
+<code>
+HadoopHiveSparkSql.table("employee").select("id,name").orHaving("seller=",'100').get()
+</code><br>
+You can use key and value based parameters : having("city=", "ABC")<br>
+Or you can use raw where query : 
+where("col=(select id from users)")
+<br/>
+<code>
+HadoopHiveSparkSql.table("employee").select("id,name").select(",department").where("ram=(select id from users)").where("city=", "delhi").get()
+</code>
+
+
+<!--New Section **************************
 <br/><h4>____________</h4>
 ---------------------------------------------
 <br/>
 <code>
 print(HadoopHiveSparkSql.table("employee")
-      .select("id,name")
-      .select(",department")
-      .where("ram=(select id from users)")
-      .where("city=", "delhi")
-      .orWhere("seller=",'100')
-      .orWhere("brand=",'rock')
-      .whereBetween("age",[200,300])
-      .join("users","users.id=employee.emp_id","left")
-      .join("cars","cars.id=employee.emp_id")
-      .groupBy("name")
-      .orderBy("ID","desc")
-      .limit(10,20).get())
-</code>
-
-
-<!--New Section **************************-->
-<br/><h4>____________</h4>
----------------------------------------------
-<br/>
-<code>
-print(HadoopHiveSparkSql.table("employee")
-      .select("id,name")
-      .select(",department")
-      .where("ram=(select id from users)")
-      .where("city=", "delhi")
-      .orWhere("seller=",'100')
-      .orWhere("brand=",'rock')
-      .whereBetween("age",[200,300])
-      .join("users","users.id=employee.emp_id","left")
-      .join("cars","cars.id=employee.emp_id")
-      .groupBy("name")
-      .orderBy("ID","desc")
-      .limit(10,20).get())
-</code>
+     .select("id,name")
+     .select(",department")
+     .where("ram=(select id from users)")
+     .where("city=", "delhi")
+     .orWhere("seller=",'100')
+     .orWhere("brand=",'rock')
+     .whereBetween("age",[200,300])
+     .join("users","users.id=employee.emp_id","left")
+     .join("cars","cars.id=employee.emp_id")
+     .groupBy("name")
+     .orderBy("ID","desc")
+     .limit(10,20).get())
+</code>-->
